@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://kit.fontawesome.com/80833262c1.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+    <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+    <title>Weather App</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="col-3">
+            <h3>Search for a City:</h3>
+            <div class="row">
+                <input type="text" class="searchInput"placeholder="Seattle">
+                <button type="submit" class="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="row">
+                <h1 class="cityName"></h1>
+                <h1 class="currentDate"></h1>
+                <i class="weatherIcon"></i>
+            </div>
+            <div class="row">
+                <p class="temp"></p>
+            </div>
+            <div class="row">
+                <p class="humidity"></p>
+            </div>
+            <div class="row">
+                <p class="windSpeed"></p>
+            </div>
+            <div class="row">
+                <p class="uvIndex"></p>
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script src="assets/js/weather.js"></script>
+</html>
