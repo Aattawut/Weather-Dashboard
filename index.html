@@ -11,34 +11,38 @@
 </head>
 <body>
 
+    <header class="header">Weather Dashboard</header>
+
     <div class="container">
         <div class="col-3">
-            <h1>Search for a City:</h1>
+            <div class="row">
+                <h1>Search for a City:</h1>
+            </div>
             <div class="row">
                 <input type="text" class="searchInput"placeholder="Seattle">
                 <button type="submit" class="searchBtn">
-                    <i class="fas fa-search"></i>
+                <i class="fas fa-search"></i>
                 </button>
             </div>
             <div class="historyItems"></div>
         </div>
         <div class="col-9">
             <div class="row">
-                <h1 class="cityName"></h1>
+                <h1 class="cityName">Atlanta</h1>
                 <h1 class="currentDate"></h1>
                 <img class="weatherIcon"></img>
             </div>
             <div class="row">
-                <p class="temp"></p>
+                <p class="temp">Temperature:</p>
             </div>
             <div class="row">
-                <p class="humidity"></p>
+                <p class="humidity">Humidity:</p>
             </div>
             <div class="row">
-                <p class="windSpeed"></p>
+                <p class="windSpeed">Wind Speed:</p>
             </div>
             <div class="row">
-                <p class="uvIndex"></p>
+                <p class="uvIndex">UV Index:</p>
             </div>
         </div>
     </div>
