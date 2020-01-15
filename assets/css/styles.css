@@ -25,6 +25,13 @@ button:focus {
     outline-color: #b2bec3;
 }
 
+.col-3 {
+    width: 30%;
+}
+
+.col-9 {
+    width: 70%;
+}
 .row {
     display: flex;
     line-height: 50%;

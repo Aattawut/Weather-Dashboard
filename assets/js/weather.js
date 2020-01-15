@@ -38,7 +38,6 @@ searchBtn.on("click", function(e) {
     })
     .then(function(weatherData) {
         console.log(weatherData);
-        searchHistoryArr.push(citySearchValue);
         let cityObj = {
             cityName: weatherData.name,
             cityTemp: weatherData.main.temp,
@@ -47,10 +46,17 @@ searchBtn.on("click", function(e) {
             // cityUVIndex: weatherData.
             cityWeatherIconName: weatherData.weather[0].icon
         }
-
-        let renderedWeatherIcon = `https:///openweathermap.org/img/w/${cityObj.cityWeatherIconName}.png`;
-        renderWeatherData(cityObj.cityName, cityObj.cityTemp, cityObj.cityHumidity, cityObj.cityWindSpeed, renderedWeatherIcon);
-        renderSearchHistory(cityObj.cityName);
+        // Keeps user from adding the same city to the searchHistory array list more than once
+        if (searchHistoryArr.indexOf(cityObj.cityName) === -1) {
+            searchHistoryArr.push(cityObj.cityName);
+            let renderedWeatherIcon = `https:///openweathermap.org/img/w/${cityObj.cityWeatherIconName}.png`;
+            renderWeatherData(cityObj.cityName, cityObj.cityTemp, cityObj.cityHumidity, cityObj.cityWindSpeed, renderedWeatherIcon);
+            renderSearchHistory(cityObj.cityName);
+        }else{
+            console.log("City already in searchHistory. Not adding to history list")
+            let renderedWeatherIcon = `https:///openweathermap.org/img/w/${cityObj.cityWeatherIconName}.png`;
+            renderWeatherData(cityObj.cityName, cityObj.cityTemp, cityObj.cityHumidity, cityObj.cityWindSpeed, renderedWeatherIcon);
+        }
     });
 });
 
