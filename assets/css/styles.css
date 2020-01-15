@@ -27,10 +27,17 @@ button:focus {
 
 .row {
     display: flex;
+    line-height: 50%;
+    margin: 5px 5px 5px 0px;
 }
 
 .row * {
     margin-right: 5px;
+}
+
+img {
+    width: auto;
+    height: 50%;
 }
 
 input {
