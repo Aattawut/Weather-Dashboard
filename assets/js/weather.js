@@ -85,6 +85,7 @@ function getWeather() {
     getFiveDayForecast();
 
     function getFiveDayForecast() {
+        cardRow.empty();
         let queryUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${citySearchValue}&APPID=${apiKey}&units=imperial`;
         $.ajax({
             url: queryUrl,
