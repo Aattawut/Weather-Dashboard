@@ -34,17 +34,43 @@ button:focus {
     max-width: 640px;
     height: 100%;
 }
-.col-3 {
+
+.search {
     background-color: #f5f6fa;
-    width: 40%;
+    width: 600px;
 }
 
-.col-9 {
+.forecast {
     border: solid 1px #cecfd2;
     margin-left: 5%;
     min-width: 500px;
     padding: 12px 15px 15px 15px;
     height: 40%;
+}
+
+ .five-day-container h1 {
+    margin-top: 25px;
+    margin-left: 5%;
+}
+
+.card-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.five-day-card {
+    margin-left: 58.5px;
+    width: 175px;
+    height: auto;
+    border-radius: 5px;
+    color: white;
+    font-size: larger;
+    background-color: #3498db;
+}
+
+.five-day-container .card-text {
+    margin: none;
+    padding: 10px 30px 10px 10px;
 }
 
 .historyItems {
