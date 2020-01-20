@@ -61,7 +61,6 @@ function getWeather() {
         method: "GET"
     })
     .then(function(weatherData) {
-        console.log(weatherData);
         let cityObj = {
             cityName: weatherData.name,
             cityTemp: weatherData.main.temp,
@@ -92,22 +91,20 @@ function getWeather() {
             method: "GET"
         })
         .then(function(fiveDayReponse) {
-            console.log(fiveDayReponse);
-
             for (let i = 0; i != fiveDayReponse.list.length; i+=8 ) {
-                console.log(i);
                 let cityObj = {
                     date: fiveDayReponse.list[i].dt_txt,
                     icon: fiveDayReponse.list[i].weather[0].icon,
                     temp: fiveDayReponse.list[i].main.temp,
                     humidity: fiveDayReponse.list[i].main.humidity
                 }
+                let dateStr = cityObj.date;
+                let trimmedDate = dateStr.substring(0, 10); 
                 let weatherIco = `https:///openweathermap.org/img/w/${cityObj.icon}.png`;
-                createForecastCard(cityObj.date, weatherIco, cityObj.temp, cityObj.humidity);
+                createForecastCard(trimmedDate, weatherIco, cityObj.temp, cityObj.humidity);
             }
         })
-    }
-    
+    }   
 }
 
 function createForecastCard(date, icon, temp, humidity) {
