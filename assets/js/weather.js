@@ -34,17 +34,9 @@ searchBtn.on("click", function(e) {
 
 $(".historyEntry").on("click", function() {
     console.log("clicked history item")
+    let thisElement = $(this);
+    getWeather(thisElement.text());
 })
-
-function renderWeatherData(cityName, cityTemp, cityHumidity, cityWindSpeed, cityWeatherIcon) {
-    cityNameEl.text(cityName)
-    currentDateEl.text(`(${today})`)
-    tempEl.text(`Temperature: ${cityTemp} °F`);
-    humidityEl.text(`Humidity: ${cityHumidity}%`);
-    windSpeedEl.text(`Wind Speed: ${cityWindSpeed} MPH`);
-    uvIndexEl.text();
-    weatherIconEl.attr("src", cityWeatherIcon);
-}
 
 function renderSearchHistory(cityName) {
     if (JSON.parse(localStorage.getItem("searchHistory")) === null) {
@@ -59,6 +51,16 @@ function renderSearchHistory(cityName) {
             searchHistoryEl.prepend(newListItem);
         }
     }
+}
+
+function renderWeatherData(cityName, cityTemp, cityHumidity, cityWindSpeed, cityWeatherIcon) {
+    cityNameEl.text(cityName)
+    currentDateEl.text(`(${today})`)
+    tempEl.text(`Temperature: ${cityTemp} °F`);
+    humidityEl.text(`Humidity: ${cityHumidity}%`);
+    windSpeedEl.text(`Wind Speed: ${cityWindSpeed} MPH`);
+    uvIndexEl.text();
+    weatherIconEl.attr("src", cityWeatherIcon);
 }
 
 function getWeather(desiredCity) {
@@ -118,11 +120,9 @@ function getWeather(desiredCity) {
     }   
 }
 
-
-
 function createForecastCard(date, icon, temp, humidity) {
 
-        // HTML elements we will create to later
+    // HTML elements we will create to later
     let fiveDayCardEl = $("<div>").attr("class", "five-day-card");
     let cardDate = $("<h3>").attr("class", "card-text");
     let cardIcon = $("<img>").attr("class", "weatherIcon");
