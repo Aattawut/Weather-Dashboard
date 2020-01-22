@@ -13,9 +13,7 @@ let tempEl = $(".temp");
 let humidityEl = $(".humidity");
 let windSpeedEl = $(".windSpeed");
 let uvIndexEl = $(".uvIndex");
-
 let cardRow = $(".card-row");
-
 
 // Create a current date variable
 var today = new Date();
@@ -26,13 +24,17 @@ var today = mm + '/' + dd + '/' + yyyy;
 
 let searchHistoryArr = [];
 
+renderSearchHistory();
 
 searchBtn.on("click", function(e) {
     e.preventDefault();
     console.log("clicked button")
-
-    getWeather();
+    getWeather(searchInput.val());
 });
+
+$(".historyEntry").on("click", function() {
+    console.log("clicked history item")
+})
 
 function renderWeatherData(cityName, cityTemp, cityHumidity, cityWindSpeed, cityWeatherIcon) {
     cityNameEl.text(cityName)
@@ -45,17 +47,23 @@ function renderWeatherData(cityName, cityTemp, cityHumidity, cityWindSpeed, city
 }
 
 function renderSearchHistory(cityName) {
-    // debugger;
-    let newListItem = $("<li>").attr("class", "historyEntry");
-    for(let i = 0; i < searchHistoryArr.length; i++) {
-        newListItem.text(searchHistoryArr[i]);
-        searchHistoryEl.prepend(newListItem);
+    if (JSON.parse(localStorage.getItem("searchHistory")) === null) {
+        return;
+    }else{
+        let searchHistoryArr = JSON.parse(localStorage.getItem("searchHistory"));
+        searchHistoryEl.empty();
+        for(let i = 0; i < searchHistoryArr.length; i++) {
+            // We put newListItem in loop because otherwise the text of the li element changes, rather than making a new element for each array index
+            let newListItem = $("<li>").attr("class", "historyEntry");
+            newListItem.text(searchHistoryArr[i]);
+            searchHistoryEl.prepend(newListItem);
+        }
     }
 }
 
-function getWeather() {
-    let citySearchValue = searchInput.val();
-    let queryUrl = `https://api.openweathermap.org/data/2.5/weather?q=${citySearchValue}&APPID=${apiKey}&units=imperial`;
+function getWeather(desiredCity) {
+    let searchHistoryArr = (JSON.parse(localStorage.getItem("searchHistory")));
+    let queryUrl = `https://api.openweathermap.org/data/2.5/weather?q=${desiredCity}&APPID=${apiKey}&units=imperial`;
     $.ajax({
         url: queryUrl,
         method: "GET"
@@ -72,6 +80,8 @@ function getWeather() {
         // Keeps user from adding the same city to the searchHistory array list more than once
         if (searchHistoryArr.indexOf(cityObj.cityName) === -1) {
             searchHistoryArr.push(cityObj.cityName);
+            // store our array of searches and save 
+            localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArr));
             let renderedWeatherIcon = `https:///openweathermap.org/img/w/${cityObj.cityWeatherIconName}.png`;
             renderWeatherData(cityObj.cityName, cityObj.cityTemp, cityObj.cityHumidity, cityObj.cityWindSpeed, renderedWeatherIcon);
             renderSearchHistory(cityObj.cityName);
@@ -81,11 +91,12 @@ function getWeather() {
             renderWeatherData(cityObj.cityName, cityObj.cityTemp, cityObj.cityHumidity, cityObj.cityWindSpeed, renderedWeatherIcon);
         }
     });
+    searchInput.empty();
     getFiveDayForecast();
 
     function getFiveDayForecast() {
         cardRow.empty();
-        let queryUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${citySearchValue}&APPID=${apiKey}&units=imperial`;
+        let queryUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${desiredCity}&APPID=${apiKey}&units=imperial`;
         $.ajax({
             url: queryUrl,
             method: "GET"
@@ -106,6 +117,8 @@ function getWeather() {
         })
     }   
 }
+
+
 
 function createForecastCard(date, icon, temp, humidity) {
 
