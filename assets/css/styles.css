@@ -66,6 +66,10 @@ input {
     background-color: #f5f6fa;
 }
 
+.search h1 {
+    line-height: 30px;
+}
+
 .forecast {
     margin-top: 25px;
     border: solid 1px #cecfd2;
