@@ -1,7 +1,7 @@
 # 06-Server-Side-APIs
 Build a weather dashboard using the OpenWeather API.
 
-Production page: https://dhens.github.io/Unit-06-Server-Side-API/
+Production page: https://dhens.github.io/Weather-Dashboard/
 
 ![weatherPage](https://i.imgur.com/IUi9If8.png)
 
